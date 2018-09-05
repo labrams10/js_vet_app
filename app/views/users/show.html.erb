@@ -1,0 +1,25 @@
+<h1>Hello, <b><%= current_user.name %>!</b></h1>
+<p>Click <%= link_to "here", user_animals_path(current_user) %> to see your pets.</p>
+  <br>
+<h3>Upcoming Appointment:</h3>
+<% if current_user.appointments.none? %>
+    <i>You have no pending appointments.</i>
+    <br>
+    <br>
+    <br>
+    <i>Need to schedule a visit? Click <%= link_to "here", new_user_appointment_path(current_user) %>.</i><br>
+<% end %>
+<% current_user.appointments.each do |appointment| %>
+    <%= appointment.date.strftime("%B %d, %Y") %>
+    <br>
+    at <%= appointment.time.strftime("%l %P") %> with Dr. <%= appointment.vet.name %>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+<% end %>
+<br>
+<br>
+    <h2><b>We get it.</b> <i>Life happens.</i></h2>
+    <p>If something came up and you can no longer make your appointment, please <%= link_to "let us know.", user_appointments_path(current_user) %></p>
